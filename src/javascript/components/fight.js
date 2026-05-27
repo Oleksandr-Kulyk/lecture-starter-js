@@ -28,6 +28,7 @@ export async function fight(firstFighter, secondFighter) {
             health: firstFighter.health,
             maxHealth: firstFighter.health,
             indicator: document.getElementById('left-fighter-indicator'),
+            criticalHitIndicator: document.getElementById('left-fighter-critical-hit-indicator'),
             isBlockActive: false,
             isCriticalHitAvailable: true,
             criticalHitTimeoutId: null
@@ -36,6 +37,7 @@ export async function fight(firstFighter, secondFighter) {
             health: secondFighter.health,
             maxHealth: secondFighter.health,
             indicator: document.getElementById('right-fighter-indicator'),
+            criticalHitIndicator: document.getElementById('right-fighter-critical-hit-indicator'),
             isBlockActive: false,
             isCriticalHitAvailable: true,
             criticalHitTimeoutId: null
@@ -57,6 +59,20 @@ export async function fight(firstFighter, secondFighter) {
             const healthPercentage = (Math.max(health, 0) / maxHealth) * 100;
 
             indicator.style.width = `${healthPercentage}%`;
+        };
+
+        const startCriticalHitCooldown = fighterState => {
+            const { criticalHitIndicator } = fighterState;
+
+            criticalHitIndicator.style.transition = 'none';
+            criticalHitIndicator.style.width = '0%';
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    criticalHitIndicator.style.transition = `width ${CRITICAL_HIT_COOLDOWN}ms linear`;
+                    criticalHitIndicator.style.width = '100%';
+                });
+            });
         };
 
         const checkFightOver = () => {
@@ -124,6 +140,7 @@ export async function fight(firstFighter, secondFighter) {
             }
 
             firstFighterState.isCriticalHitAvailable = false;
+            startCriticalHitCooldown(firstFighterState);
             secondFighterState.health = applyDamage(secondFighterState, firstFighter.attack * 2);
             updateHealthIndicator(secondFighterState);
             checkFightOver();
@@ -139,6 +156,7 @@ export async function fight(firstFighter, secondFighter) {
             }
 
             secondFighterState.isCriticalHitAvailable = false;
+            startCriticalHitCooldown(secondFighterState);
             firstFighterState.health = applyDamage(firstFighterState, secondFighter.attack * 2);
             updateHealthIndicator(firstFighterState);
             checkFightOver();
