@@ -7,25 +7,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(128, 128, 128, 0.6);
+  background-color: rgba(17, 24, 39, 0.72);
 }
 
 .modal-root {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(0, 0, 0, .2);
-  background-color: white;
+  min-width: 320px;
+  max-width: 420px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff8e1;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.38);
 }
 
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-width: 300px;
   padding: 1rem;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   font-weight: 700;
   font-size: 22px;
+  color: #2f2417;
+  background-color: #ebd759;
 }
 
 .modal-body {
@@ -37,4 +43,26 @@
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
+}
+
+.winner-modal___body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+}
+
+.winner-modal___image {
+  max-width: 260px;
+  max-height: 300px;
+  object-fit: contain;
+}
+
+.winner-modal___name {
+  color: #2f2417;
+  font-family: 'Arial Black', Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
 }
