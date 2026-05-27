@@ -20,6 +20,6 @@ export default function showWinnerModal(fighter) {
     showModal({
         title: 'Winner',
         bodyElement,
-        onClose: () => {}
+        onClose: () => window.location.reload()
     });
 }
